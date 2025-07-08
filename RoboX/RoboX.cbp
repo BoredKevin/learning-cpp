@@ -35,10 +35,18 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/calculate_trips.h" />
+		<Unit filename="include/energy_display.h" />
+		<Unit filename="include/input_validator.h" />
+		<Unit filename="include/log_loading.h" />
 		<Unit filename="include/log_message.h" />
+		<Unit filename="include/refill_energy.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/calculate_trips.cpp" />
+		<Unit filename="src/energy_display.cpp" />
+		<Unit filename="src/input_validator.cpp" />
+		<Unit filename="src/log_loading.cpp" />
 		<Unit filename="src/log_message.cpp" />
+		<Unit filename="src/refill_energy.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

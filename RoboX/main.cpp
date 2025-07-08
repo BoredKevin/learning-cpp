@@ -2,6 +2,10 @@
 #include <string>
 #include "calculate_trips.h"
 #include "log_message.h"
+#include "refill_energy.h"
+#include "input_validator.h"
+#include "energy_display.h"
+#include "log_loading.h"
 
 using namespace std;
 
@@ -13,13 +17,6 @@ const int MIN_FUEL = 25;
 const int TRIP_BATTERY_COST = 5;
 const int TRIP_FUEL_COST = 7;
 
-// Utility function
-void log_loading(const string& message, int times = 3) {
-    for (int i = 1; i <= times; ++i) {
-        log_message(LOG, message + string(i, '.'));
-    }
-}
-
 // System check
 void check_system(int battery, int fuel) {
     if (battery < MIN_BATTERY) {
@@ -28,24 +25,6 @@ void check_system(int battery, int fuel) {
     if (fuel < MIN_FUEL) {
         log_message(WARNING, "Fuel level is too low!");
     }
-}
-
-// Input validator
-int get_valid_input(const string& prompt, int min_value, int max_value, const string& unit) {
-    int value;
-    do {
-        log_message(INPUT, prompt);
-        cout << ">> ";
-        cin >> value;
-
-        if (value < min_value) {
-            log_message(WARNING, unit + " cannot be less than " + to_string(min_value) + "!\n");
-        } else if (value > max_value) {
-            log_message(WARNING, unit + " cannot exceed " + to_string(max_value) + "!\n");
-        }
-    } while (value < min_value || value > max_value);
-
-    return value;
 }
 
 // Main program
@@ -58,11 +37,11 @@ int main() {
     int fuel = get_valid_input("Input fuel [in tons] (0 - 100 tons)", 0, MAX_FUEL, "Fuel");
 
     if (battery == MAX_BATTERY && fuel == MAX_FUEL) {
-        log_message(LOG, "Battery and fuel are full!");
+        log_message(LOG, "Battery and fuel are full!\n");
     } else if (battery == MAX_BATTERY) {
-        log_message(LOG, "Battery is full!");
+        log_message(LOG, "Battery is full!\n");
     } else if (fuel == MAX_FUEL) {
-        log_message(LOG, "Fuel is full!");
+        log_message(LOG, "Fuel is full!\n");
     }
 
     if (battery < MIN_BATTERY || fuel < MIN_FUEL) {
@@ -73,24 +52,56 @@ int main() {
         return 0;
     }
 
-    log_message(LOG, "[ROBO-X] is ready to take off!");
-    log_message(LOG, "Displaying battery and fuel levels.");
-    log_loading("Loading");
+    energy_display(battery, fuel, MAX_BATTERY, MAX_FUEL);
 
-    log_message(DISPLAY, "Battery level: " + to_string(battery) + "%.");
-    log_message(DISPLAY, "Fuel level: " + to_string(fuel) + " tons.");
-    log_message(DISPLAY, "Number of trips possible: " +
-                         to_string(min(fuel / TRIP_FUEL_COST, battery / TRIP_BATTERY_COST)));
-
-    calculate_trips(fuel, battery, TRIP_FUEL_COST, TRIP_BATTERY_COST);
+    calculate_trips(battery, fuel, TRIP_FUEL_COST, TRIP_BATTERY_COST);
 
     char again;
-    log_message(DISPLAY, "Would you like to do another trip? (y/n)");
+    log_message(DISPLAY, "Would you like to make another trip? (y/n)");
     cout << ">> ";
     cin >> again;
 
-    if ('y' == again || 'Y' == again) {
-        calculate_trips(fuel, battery, TRIP_FUEL_COST, TRIP_BATTERY_COST);
+    while ('y' == again || 'Y' == again) {
+
+        do {
+            if (fuel < TRIP_FUEL_COST) {
+            log_message(WARNING, "Fuel not enough to make the trip!");
+            refill_energy(battery, fuel, MAX_BATTERY, MAX_FUEL);
+
+            energy_display(battery, fuel, MAX_BATTERY, MAX_FUEL);
+
+            calculate_trips(battery, fuel, TRIP_FUEL_COST, TRIP_BATTERY_COST);
+
+            log_message(DISPLAY, "Would you like to make another trip? (y/n)");
+            cout << ">> ";
+            cin >> again;
+        }
+
+        if (battery < TRIP_BATTERY_COST || battery % TRIP_BATTERY_COST != 0) {
+            log_message(WARNING, "Battery not enough to make the trip!");
+            refill_energy(battery, fuel, MAX_BATTERY, MAX_FUEL);
+
+            energy_display(battery, fuel, MAX_BATTERY, MAX_FUEL);
+
+            calculate_trips(battery, fuel, TRIP_FUEL_COST, TRIP_BATTERY_COST);
+
+            log_message(DISPLAY, "Would you like to make another trip? (y/n)");
+            cout << ">> ";
+            cin >> again;
+            }
+        } while (fuel < TRIP_FUEL_COST || battery < TRIP_BATTERY_COST);
+
+        calculate_trips(battery, fuel, TRIP_FUEL_COST, TRIP_BATTERY_COST);
+
+        log_message(DISPLAY, "Would you like to make another trip? (y/n)");
+        cout << ">> ";
+        cin >> again;
+
+    }
+
+    if ('n' == again) {
+        log_loading("Powering off engine");
+        log_message(LOG, "Engine powered off.");
     }
 
     return 0;

@@ -1,0 +1,67 @@
+# depslib dependency file v1.0
+1751985929 source:e:\1 coding\c++\learning-cpp\robox\src\calculate_trips.cpp
+	<iostream>
+	<string>
+	"calculate_trips.h"
+	"log_message.h"
+	"log_loading.h"
+
+1751983818 e:\1 coding\c++\learning-cpp\robox\include\calculate_trips.h
+
+1751979062 e:\1 coding\c++\learning-cpp\robox\include\log_message.h
+	<string>
+
+1751980120 source:e:\1 coding\c++\learning-cpp\robox\src\log_message.cpp
+	<iostream>
+	<string>
+
+1751986245 source:e:\1 coding\c++\learning-cpp\robox\main.cpp
+	<iostream>
+	<string>
+	"calculate_trips.h"
+	"log_message.h"
+	"refill_energy.h"
+	"input_validator.h"
+	"energy_display.h"
+	"log_loading.h"
+
+1751983843 e:\1 coding\c++\learning-cpp\robox\include\refill_energy.h
+
+1751983677 source:e:\1 coding\c++\learning-cpp\robox\src\refill_energy.cpp
+	<iostream>
+	<string>
+	"refill_energy.h"
+	"log_message.h"
+	"input_validator.h"
+	"energy_display.h"
+	"log_loading.h"
+	<stdlib.h>
+
+1751977602 source:e:\1 coding\c++\learning-cpp\robox\src\input_validator.cpp
+	"input_validator.h"
+	<iostream>
+	<string>
+	"log_message.h"
+
+1751977832 e:\1 coding\c++\learning-cpp\robox\include\input_validator.h
+	<string>
+
+1751983827 e:\1 coding\c++\learning-cpp\robox\include\energy_display.h
+
+1751980447 e:\1 coding\c++\learning-cpp\robox\include\log_loading.h
+	<string>
+
+1751983854 source:e:\1 coding\c++\learning-cpp\robox\src\energy_display.cpp
+	"energy_display.h"
+	<string>
+	"log_message.h"
+	"log_loading.h"
+	<iostream>
+
+1751982770 source:e:\1 coding\c++\learning-cpp\robox\src\log_loading.cpp
+	"log_loading.h"
+	"log_message.h"
+	<string>
+	<iostream>
+	<stdlib.h>
+
