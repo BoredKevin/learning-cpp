@@ -3,6 +3,7 @@
 #include "calculate_trips.h"
 #include "log_message.h"
 #include "log_loading.h"
+#include "input_validator.h"
 
 using namespace std;
 
@@ -11,16 +12,12 @@ void calculate_trips(int& battery, int& fuel, int TRIP_FUEL_COST, int TRIP_BATTE
     int max_trips_fuel = fuel / TRIP_FUEL_COST;
     int max_trips_battery = battery / TRIP_BATTERY_COST;
     int trip_limit = min(max_trips_fuel, max_trips_battery);
-    int trips;
 
-    do
-    {
-
-        log_message(DISPLAY, "Number of trips possible: " + to_string(min(fuel / TRIP_FUEL_COST, battery / TRIP_BATTERY_COST)));
-        log_message(INPUT, "How many trips do you want to make?");
-        cout << ">> ";
-        cin >> trips;
-
+    log_message(DISPLAY, "Number of trips possible: " + to_string(min(fuel / TRIP_FUEL_COST, battery / TRIP_BATTERY_COST)));
+    //log_message(INPUT, "How many trips do you want to make?");
+    int trips = get_valid_input("How many trips do you want to make?", 1, trip_limit, "trips");
+    /*cout << ">> ";
+    cin >> trips;
         if (trips < 1)
         {
             log_message(WARNING, "Amount of trips cannot be zero or negative!\n");
@@ -29,8 +26,7 @@ void calculate_trips(int& battery, int& fuel, int TRIP_FUEL_COST, int TRIP_BATTE
         {
             log_message(WARNING, "Energy isn't enough for that many trips!\n");
         }
-    }
-    while (trips < 0 || trips > trip_limit);
+        */
 
     // Perform trip
     int used_fuel = trips * TRIP_FUEL_COST;
