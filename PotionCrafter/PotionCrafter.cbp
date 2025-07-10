@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,7 +34,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/inventory_display.h" />
+		<Unit filename="include/log_message.h" />
+		<Unit filename="include/potion_brewing.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/inventory_display.cpp" />
+		<Unit filename="src/log_message.cpp" />
+		<Unit filename="src/potion_brewing.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

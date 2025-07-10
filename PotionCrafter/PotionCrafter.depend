@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1752166556 source:e:\1 coding\c++\3 alchemy\learning-cpp\potioncrafter\main.cpp
+	<iostream>
+	<string>
+	<chrono>
+	<iomanip>
+	<ctime>
+	<vector>
+	<map>
+	<algorithm>
+	"log_message.h"
+	"inventory_display.h"
+	"potion_brewing.h"
+
+1752066823 e:\1 coding\c++\3 alchemy\learning-cpp\potioncrafter\include\system_message.h
+	<string>
+
+1752133694 e:\1 coding\c++\3 alchemy\learning-cpp\potioncrafter\include\log_message.h
+	<string>
+
+1752136503 source:e:\1 coding\c++\3 alchemy\learning-cpp\potioncrafter\src\log_message.cpp
+	<iostream>
+	<string>
+	<chrono>
+	<iomanip>
+	<ctime>
+
+1752133592 source:e:\1 coding\c++\3 alchemy\learning-cpp\potioncrafter\src\ingredients_display.cpp
+	"ingredients_display.h"
+
+1752133591 e:\1 coding\c++\3 alchemy\learning-cpp\potioncrafter\include\ingredients_display.h
+
+1752166601 source:e:\1 coding\c++\3 alchemy\learning-cpp\potioncrafter\src\inventory_display.cpp
+	<vector>
+	<iostream>
+	<string>
+	<iomanip>
+	"inventory_display.h"
+	"log_message.h"
+
+1752138686 e:\1 coding\c++\3 alchemy\learning-cpp\potioncrafter\include\inventory_display.h
+
+1752163617 source:e:\1 coding\c++\3 alchemy\learning-cpp\potioncrafter\src\potion_brewing.cpp
+	"potion_brewing.h"
+	<algorithm>
+	<vector>
+	<iostream>
+	<cctype>
+
+1752166656 e:\1 coding\c++\3 alchemy\learning-cpp\potioncrafter\include\potion_brewing.h
+	<string>
+	<map>
+
